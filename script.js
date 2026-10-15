@@ -1,42 +1,35 @@
 
 "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const WHATSAPP_NUMBER = "573014987709";
+document.addEventListener("DOMContentLoaded", function () {
+  const WHATSAPP = "573014987709";
 
-  // ==========================================
-  // AÑO DEL PIE DE PÁGINA
-  // ==========================================
+  const $ = (selector) => document.querySelector(selector);
 
-  const yearElement = document.getElementById("currentYear");
+  const year = $("#currentYear");
+  const menuButton = $("#menuToggle");
+  const nav = $("#nav");
 
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
+  if (year) {
+    year.textContent = new Date().getFullYear();
   }
 
-  // ==========================================
-  // MENÚ MÓVIL
-  // ==========================================
-
-  const menuToggle = document.getElementById("menuToggle");
-  const nav = document.getElementById("nav");
-
+  // MENÚ RESPONSIVE
   function closeMenu() {
-    if (!menuToggle || !nav) return;
-
+    if (!menuButton || !nav) return;
     nav.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Abrir menú");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Abrir menú");
   }
 
-  if (menuToggle && nav) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const open = nav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute(
         "aria-label",
-        isOpen ? "Cerrar menú" : "Abrir menú"
+        open ? "Cerrar menú" : "Abrir menú"
       );
     });
 
@@ -47,457 +40,319 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeMenu();
     });
-
-    document.addEventListener("click", (event) => {
-      if (
-        nav.classList.contains("open") &&
-        !nav.contains(event.target) &&
-        !menuToggle.contains(event.target)
-      ) {
-        closeMenu();
-      }
-    });
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 760) closeMenu();
-    });
   }
 
-  // ==========================================
-  // SERVICIOS Y TARIFAS CONFIGURABLES
-  // ==========================================
-  //
-  // IMPORTANTE:
-  // Estas cifras son valores ilustrativos en COP.
-  // Ajusta cada tarifa a tus precios comerciales reales.
-  //
-  // Los valores por m² NO son tarifas oficiales ni
-  // constituyen presupuestos definitivos de construcción.
-
-  const SERVICES = {
+  // TARIFAS DE REFERENCIA EDITABLES EN PESOS COLOMBIANOS.
+  // Confirma y sustituye estos valores por las tarifas comerciales reales.
+  const services = {
     diseno: {
       name: "Diseño arquitectónico",
-      unit: "m²",
-      rates: {
-        basico: 25000,
-        medio: 35000,
-        alto: 50000
-      },
+      rate: { basico: 25000, medio: 35000, alto: 50000 },
       minimum: 1500000,
-      label: "Área de diseño"
+      unit: "m²"
     },
-
     render: {
       name: "Render y visualización 3D",
-      unit: "m²",
-      rates: {
-        basico: 15000,
-        medio: 25000,
-        alto: 40000
-      },
+      rate: { basico: 15000, medio: 25000, alto: 40000 },
       minimum: 500000,
-      label: "Área de referencia"
+      unit: "m²"
     },
-
     construccion: {
       name: "Construcción",
-      unit: "m²",
-      rates: {
-        basico: 1800000,
-        medio: 2600000,
-        alto: 3800000
-      },
+      rate: { basico: 1800000, medio: 2600000, alto: 3800000 },
       minimum: 0,
-      label: "Área construida"
+      unit: "m²"
     },
-
     remodelacion: {
       name: "Remodelación",
-      unit: "m²",
-      rates: {
-        basico: 500000,
-        medio: 900000,
-        alto: 1500000
-      },
+      rate: { basico: 500000, medio: 900000, alto: 1500000 },
       minimum: 1000000,
-      label: "Área de remodelación"
+      unit: "m²"
     },
-
     bim: {
       name: "Modelado BIM",
-      unit: "m²",
-      rates: {
-        basico: 12000,
-        medio: 22000,
-        alto: 35000
-      },
+      rate: { basico: 12000, medio: 22000, alto: 35000 },
       minimum: 500000,
-      label: "Área modelada"
+      unit: "m²"
     },
-
     planos: {
       name: "Planos y documentación",
-      unit: "m²",
-      rates: {
-        basico: 15000,
-        medio: 25000,
-        alto: 40000
-      },
+      rate: { basico: 15000, medio: 25000, alto: 40000 },
       minimum: 700000,
-      label: "Área documentada"
+      unit: "m²"
     },
-
     inmobiliaria: {
       name: "Gestión inmobiliaria",
-      unit: "m²",
-      rates: {
-        basico: 0,
-        medio: 0,
-        alto: 0
-      },
-      minimum: 0,
-      label: "Área del inmueble"
+      custom: true,
+      unit: "m²"
     }
   };
 
-  const FINISHES = {
+  const finishNames = {
     basico: "Básico",
     medio: "Medio",
     alto: "Premium"
   };
 
-  const COP = new Intl.NumberFormat("es-CO", {
-    style: "currency",
-    currency: "COP",
-    maximumFractionDigits: 0
-  });
+  const money = (value) =>
+    new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0
+    }).format(value);
 
-  const quoteForm = document.getElementById("quoteForm");
-  const projectType = document.getElementById("projectType");
-  const areaInput = document.getElementById("area");
-  const finishInput = document.getElementById("finish");
-  const cityInput = document.getElementById("city");
-  const detailsInput = document.getElementById("projectDetails");
-  const quoteResult = document.getElementById("quoteResult");
-  const areaField = document.getElementById("areaField");
+  const form = $("#quoteForm");
+  const type = $("#projectType");
+  const area = $("#area");
+  const finish = $("#finish");
+  const city = $("#city");
+  const details = $("#projectDetails");
+  const result = $("#quoteResult");
+  const areaField = $("#areaField");
 
-  if (
-    !quoteForm ||
-    !projectType ||
-    !areaInput ||
-    !finishInput ||
-    !cityInput ||
-    !detailsInput ||
-    !quoteResult
-  ) {
+  if (!form || !type || !area || !finish || !city || !result) {
+    console.error("SAMM: no se encontraron todos los campos del cotizador.");
     return;
   }
 
-  let lastEstimate = null;
+  // Impide que el navegador intente enviar el formulario y cambie la URL.
+  form.setAttribute("action", "javascript:void(0)");
+  form.setAttribute("method", "dialog");
 
-  function hideResult() {
-    quoteResult.classList.remove("visible");
-    quoteResult.replaceChildren();
-    lastEstimate = null;
+  let lastQuote = null;
+
+  function clearResult() {
+    result.classList.remove("visible");
+    result.replaceChildren();
+    lastQuote = null;
   }
 
-  function updateServiceFields() {
-    const service = SERVICES[projectType.value];
-
+  function updateService() {
+    const service = services[type.value];
     if (!service) return;
 
-    const areaLabel = areaField
-      ? areaField.querySelector("label")
-      : null;
+    const label = areaField ? areaField.querySelector("label") : null;
+    if (label) label.textContent = "Área aproximada (" + service.unit + ")";
 
-    if (areaLabel) {
-      areaLabel.textContent =
-        service.label + " (m²)";
-    }
+    finish.disabled = Boolean(service.custom);
+    if (service.custom) finish.value = "medio";
 
-    if (projectType.value === "inmobiliaria") {
-      finishInput.value = "medio";
-      finishInput.disabled = true;
-    } else {
-      finishInput.disabled = false;
-    }
-
-    hideResult();
+    clearResult();
   }
 
-  projectType.addEventListener("change", updateServiceFields);
-  finishInput.addEventListener("change", hideResult);
-  areaInput.addEventListener("input", hideResult);
-  cityInput.addEventListener("input", hideResult);
-  detailsInput.addEventListener("input", hideResult);
+  type.addEventListener("change", updateService);
+  area.addEventListener("input", clearResult);
+  finish.addEventListener("change", clearResult);
+  city.addEventListener("input", clearResult);
 
-  // Los enlaces de servicios seleccionan el servicio correspondiente.
+  if (details) details.addEventListener("input", clearResult);
+
   document.querySelectorAll("[data-service-link]").forEach((link) => {
     link.addEventListener("click", () => {
-      const selectedService = link.dataset.serviceLink;
-
-      if (SERVICES[selectedService]) {
-        projectType.value = selectedService;
-        updateServiceFields();
+      const key = link.getAttribute("data-service-link");
+      if (services[key]) {
+        type.value = key;
+        updateService();
       }
     });
   });
 
-  function createElement(tag, className, text) {
-    const element = document.createElement(tag);
-
-    if (className) element.className = className;
-    if (text !== undefined) element.textContent = text;
-
-    return element;
+  function element(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
   }
 
-  function addBreakdownRow(container, label, value) {
-    const row = createElement("div", "result-row");
-    const left = createElement("span", "", label);
-    const right = createElement("strong", "", value);
-
-    row.append(left, right);
-    container.appendChild(row);
+  function addRow(container, label, value) {
+    const row = element("div", "result-row");
+    row.append(element("span", "", label));
+    row.append(element("strong", "", value));
+    container.append(row);
   }
 
-  function calculateEstimate(serviceKey, area, finish) {
-    const service = SERVICES[serviceKey];
+  function showEstimate(quote) {
+    result.replaceChildren();
+    result.classList.add("visible");
 
-    if (!service) return null;
-
-    // La gestión inmobiliaria requiere revisar el alcance
-    // y no se cotiza de manera responsable solo por m².
-    if (serviceKey === "inmobiliaria") {
-      return {
-        service,
-        area,
-        finish,
-        total: null,
-        rate: null,
-        isCustom: true
-      };
-    }
-
-    const rate = service.rates[finish];
-
-    if (!Number.isFinite(rate) || rate <= 0) {
-      return null;
-    }
-
-    const subtotal = area * rate;
-    const total = Math.max(subtotal, service.minimum);
-
-    return {
-      service,
-      area,
-      finish,
-      rate,
-      subtotal,
-      total,
-      isCustom: false
-    };
-  }
-
-  function renderEstimate(estimate, city, details) {
-    quoteResult.replaceChildren();
-    quoteResult.classList.add("visible");
-
-    const label = createElement(
-      "span",
-      "result-label",
-      estimate.isCustom
-        ? "SOLICITUD DE COTIZACIÓN PERSONALIZADA"
-        : "ESTIMACIÓN PRELIMINAR"
-    );
-
-    quoteResult.appendChild(label);
-
-    const price = createElement(
-      "strong",
-      "result-price",
-      estimate.isCustom
-        ? "A definir"
-        : COP.format(estimate.total)
-    );
-
-    quoteResult.appendChild(price);
-
-    const description = estimate.isCustom
-      ? "La gestión inmobiliaria depende del tipo de inmueble, las tareas requeridas y el alcance de la administración. Envíanos tus datos para revisar la propuesta."
-      : "Referencia calculada para " +
-        estimate.service.name.toLowerCase() +
-        " con " +
-        estimate.area.toLocaleString("es-CO") +
-        " m² y nivel de acabado " +
-        FINISHES[estimate.finish].toLowerCase() +
-        ".";
-
-    quoteResult.appendChild(
-      createElement("p", "result-description", description)
-    );
-
-    if (!estimate.isCustom) {
-      const breakdown = createElement(
-        "div",
-        "result-breakdown"
-      );
-
-      addBreakdownRow(
-        breakdown,
-        "Servicio",
-        estimate.service.name
-      );
-
-      addBreakdownRow(
-        breakdown,
-        "Área",
-        estimate.area.toLocaleString("es-CO") + " m²"
-      );
-
-      addBreakdownRow(
-        breakdown,
-        "Tarifa ilustrativa por m²",
-        COP.format(estimate.rate)
-      );
-
-      if (estimate.subtotal < estimate.service.minimum) {
-        addBreakdownRow(
-          breakdown,
-          "Valor mínimo aplicado",
-          COP.format(estimate.service.minimum)
-        );
-      } else {
-        addBreakdownRow(
-          breakdown,
-          "Subtotal estimado",
-          COP.format(estimate.subtotal)
-        );
-      }
-
-      addBreakdownRow(
-        breakdown,
-        "Acabados",
-        FINISHES[estimate.finish]
-      );
-
-      quoteResult.appendChild(breakdown);
-    }
-
-    quoteResult.appendChild(
-      createElement(
-        "p",
-        "result-note",
-        "Este valor es únicamente orientativo. No incluye automáticamente licencias, estudios, impuestos, transporte, diseños especializados ni otros conceptos que dependan del proyecto. El alcance y el precio deben validarse antes de contratar."
+    result.append(
+      element(
+        "span",
+        "result-label",
+        quote.custom ? "COTIZACIÓN PERSONALIZADA" : "VALOR DE REFERENCIA"
       )
     );
 
-    const whatsappButton = createElement(
-      "a",
-      "btn btn-primary result-whatsapp",
-      "Enviar consulta por WhatsApp ↗"
+    result.append(
+      element(
+        "strong",
+        "result-price",
+        quote.custom ? "Por definir" : money(quote.total)
+      )
     );
 
-    const messageLines = [
+    result.append(
+      element(
+        "p",
+        "result-description",
+        quote.custom
+          ? "La gestión inmobiliaria depende de las actividades, el tipo de inmueble y el alcance del servicio. Envíanos la información para preparar una propuesta."
+          : "Estimación para " + quote.service.name.toLowerCase() +
+            " de " + quote.area.toLocaleString("es-CO") + " m²."
+      )
+    );
+
+    if (!quote.custom) {
+      const breakdown = element("div", "result-breakdown");
+
+      addRow(breakdown, "Servicio", quote.service.name);
+      addRow(
+        breakdown,
+        "Área",
+        quote.area.toLocaleString("es-CO") + " m²"
+      );
+      addRow(
+        breakdown,
+        "Tarifa de referencia",
+        money(quote.rate) + " / m²"
+      );
+      addRow(
+        breakdown,
+        "Operación",
+        quote.area.toLocaleString("es-CO") + " × " + money(quote.rate)
+      );
+
+      if (quote.minimumApplied) {
+        addRow(
+          breakdown,
+          "Valor mínimo aplicado",
+          money(quote.service.minimum)
+        );
+      } else {
+        addRow(breakdown, "Subtotal", money(quote.subtotal));
+      }
+
+      addRow(
+        breakdown,
+        "Nivel de acabado",
+        finishNames[quote.finish]
+      );
+
+      result.append(breakdown);
+    }
+
+    result.append(
+      element(
+        "p",
+        "result-note",
+        "Tarifas ilustrativas, no verificadas como precios de mercado. El valor definitivo depende del alcance, ubicación, materiales, especificaciones y condiciones del proyecto. No constituye una oferta comercial."
+      )
+    );
+
+    const message = [
       "Hola, SAMM Holdings S.A.S. Quiero solicitar una cotización.",
       "",
-      "Servicio: " + estimate.service.name,
-      "Ciudad: " + city,
-      "Área: " + estimate.area + " m²",
-      "Nivel de acabados: " + FINISHES[estimate.finish],
-      "Estimación preliminar: " +
-        (estimate.isCustom
-          ? "Por definir"
-          : COP.format(estimate.total))
-    ];
-
-    if (details) {
-      messageLines.push("", "Detalles del proyecto:", details);
-    }
-
-    messageLines.push(
+      "Servicio: " + quote.service.name,
+      "Ciudad: " + quote.city,
+      "Área: " + quote.area + " m²",
+      "Acabados: " + finishNames[quote.finish],
+      "Valor de referencia: " +
+        (quote.custom ? "Por definir" : money(quote.total)),
+      details && details.value.trim()
+        ? "Detalles: " + details.value.trim()
+        : "",
       "",
-      "Entiendo que el valor es orientativo y solicito una revisión del alcance."
+      "Solicito revisión del alcance y una cotización formal."
+    ].filter(Boolean).join("\n");
+
+    const whatsapp = element(
+      "a",
+      "btn btn-primary result-whatsapp",
+      "Consultar por WhatsApp ↗"
     );
 
-    whatsappButton.href =
-      "https://wa.me/" +
-      WHATSAPP_NUMBER +
-      "?text=" +
-      encodeURIComponent(messageLines.join("\n"));
+    whatsapp.href =
+      "https://wa.me/" + WHATSAPP + "?text=" +
+      encodeURIComponent(message);
+    whatsapp.target = "_blank";
+    whatsapp.rel = "noopener noreferrer";
 
-    whatsappButton.target = "_blank";
-    whatsappButton.rel = "noopener noreferrer";
-
-    quoteResult.appendChild(whatsappButton);
-
-    lastEstimate = estimate;
+    result.append(whatsapp);
+    lastQuote = quote;
   }
 
-  quoteForm.addEventListener("submit", (event) => {
+  // El evento submit intercepta el envío antes de cualquier navegación.
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
+    event.stopPropagation();
 
-    const serviceKey = projectType.value;
-    const area = Number(areaInput.value);
-    const finish = finishInput.value;
-    const city = cityInput.value.trim();
-    const details = detailsInput.value.trim();
+    const service = services[type.value];
+    const areaValue = Number(area.value);
+    const cityValue = city.value.trim();
+    const finishValue = finish.value;
 
-    if (!SERVICES[serviceKey]) {
-      projectType.focus();
+    if (!service) {
+      type.focus();
       return;
     }
 
-    if (!Number.isFinite(area) || area <= 0 || area > 100000) {
-      areaInput.setCustomValidity(
-        "Ingresa un área mayor que cero y menor o igual a 100.000 m²."
-      );
-      areaInput.reportValidity();
-      areaInput.setCustomValidity("");
-      areaInput.focus();
+    if (!Number.isFinite(areaValue) || areaValue <= 0 || areaValue > 100000) {
+      area.setCustomValidity("Ingresa un área entre 1 y 100.000 m².");
+      area.reportValidity();
+      area.setCustomValidity("");
+      area.focus();
       return;
     }
 
-    if (!city) {
-      cityInput.setCustomValidity(
-        "Escribe la ciudad o el municipio del proyecto."
-      );
-      cityInput.reportValidity();
-      cityInput.setCustomValidity("");
-      cityInput.focus();
+    if (!cityValue) {
+      city.setCustomValidity("Escribe la ciudad o municipio del proyecto.");
+      city.reportValidity();
+      city.setCustomValidity("");
+      city.focus();
       return;
     }
 
-    if (!FINISHES[finish]) {
-      finishInput.focus();
+    if (!service.custom && !service.rate[finishValue]) {
+      finish.focus();
       return;
     }
 
-    const estimate = calculateEstimate(
-      serviceKey,
-      area,
-      finish
-    );
+    let quote;
 
-    if (!estimate) {
-      quoteResult.classList.add("visible");
-      quoteResult.replaceChildren(
-        createElement(
-          "p",
-          "result-description",
-          "No pudimos calcular esta referencia. Verifica los datos o solicita una cotización personalizada por WhatsApp."
-        )
-      );
-      return;
+    if (service.custom) {
+      quote = {
+        service,
+        area: areaValue,
+        finish: finishValue,
+        city: cityValue,
+        custom: true
+      };
+    } else {
+      const rate = service.rate[finishValue];
+      const subtotal = areaValue * rate;
+      const total = Math.max(subtotal, service.minimum);
+
+      quote = {
+        service,
+        area: areaValue,
+        finish: finishValue,
+        city: cityValue,
+        rate,
+        subtotal,
+        total,
+        minimumApplied: subtotal < service.minimum,
+        custom: false
+      };
     }
 
-    renderEstimate(estimate, city, details);
-    quoteResult.scrollIntoView({
+    showEstimate(quote);
+
+    // Muestra el resultado sin recargar la página ni cambiar la URL.
+    result.scrollIntoView({
       behavior: "smooth",
       block: "nearest"
     });
   });
 
-  // Inicializa el formulario con el servicio seleccionado.
-  updateServiceFields();
+  updateService();
 });
