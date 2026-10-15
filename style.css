@@ -694,11 +694,12 @@ textarea:focus-visible {
 
 .brand-logo {
   display: block;
-  width: 68px;
-  height: 58px;
+  width: 85px;
+  height: 70px;
   object-fit: contain;
   object-position: center;
   flex-shrink: 0;
+}
 }
 }
 
