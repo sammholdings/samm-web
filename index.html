@@ -3,13 +3,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050811">
-  <meta name="description" content="SAMM Holdings S.A.S. Arquitectura, diseño, renders 3D y construcción en Colombia.">
+  <meta name="description" content="SAMM Holdings S.A.S. Arquitectura, diseño, construcción, visualización 3D y gestión inmobiliaria en Colombia.">
+
   <title>SAMM Holdings S.A.S. | Arquitectura y Construcción</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <!-- ENCABEZADO -->
   <header class="header">
     <a class="brand" href="#inicio" aria-label="SAMM Holdings S.A.S.">
       <img class="brand-logo" src="samm-logo.png" alt="Logo SAMM">
@@ -19,8 +24,11 @@
       </span>
     </a>
 
-    <button class="menu-toggle" id="menuToggle" type="button"
-      aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
+    <button class="menu-toggle" id="menuToggle"
+      type="button" aria-label="Abrir menú"
+      aria-expanded="false" aria-controls="nav">
+      ☰
+    </button>
 
     <nav class="nav" id="nav" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
@@ -31,171 +39,298 @@
   </header>
 
   <main>
+
+    <!-- PORTADA -->
     <section class="hero" id="inicio">
-      <div class="hero-content">
-        <p class="eyebrow">ARQUITECTURA · DISEÑO · CONSTRUCCIÓN</p>
-        <h1>Convertimos tus ideas en <span>espacios extraordinarios.</span></h1>
-        <p class="hero-text">
-          Diseño arquitectónico, visualización 3D, presupuestos y soluciones
-          de construcción para llevar tus proyectos de la idea a la realidad.
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content container">
+        <p class="eyebrow">
+          ARQUITECTURA · DISEÑO · CONSTRUCCIÓN
         </p>
-        <div class="hero-actions">
-          <a href="#cotizador" class="button button-blue">Cotiza tu proyecto ↗</a>
-          <a href="#servicios" class="button button-outline">Explorar servicios</a>
+
+        <h1>
+          Convertimos tus ideas en
+          <span>espacios extraordinarios.</span>
+        </h1>
+
+        <p class="hero-text">
+          Diseño arquitectónico, visualización 3D, presupuestos y
+          soluciones de construcción para llevar tus proyectos
+          de la idea a la realidad.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#portafolio">
+            Explorar proyectos ↗
+          </a>
+          <a class="btn btn-outline" href="#contacto">
+            Solicitar asesoría
+          </a>
         </div>
-        <p class="hero-note">Atención en Sincelejo, Barranquilla y proyectos en Colombia.</p>
+
+        <div class="hero-stats">
+          <div>
+            <strong>Diseño</strong>
+            <span>con propósito</span>
+          </div>
+          <div>
+            <strong>Calidad</strong>
+            <span>en cada detalle</span>
+          </div>
+          <div>
+            <strong>Colombia</strong>
+            <span>nuestro territorio</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-image" role="img" aria-label="Interior de arquitectura contemporánea">
-        <div class="image-label">
-          <span>DISEÑO CON PROPÓSITO</span>
-          <strong>Tu proyecto comienza aquí.</strong>
+
+      <div class="hero-label">
+        <span class="status-dot"></span>
+        DISEÑAMOS · CONSTRUIMOS · TRANSFORMAMOS
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="section services" id="servicios">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LO QUE HACEMOS</p>
+            <h2>Soluciones integrales para <span>tus proyectos.</span></h2>
+          </div>
+          <p class="section-intro">
+            Acompañamos cada etapa, desde el concepto inicial
+            hasta la ejecución y entrega.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-number">01</span>
+            <div class="service-icon">⌂</div>
+            <h3>Diseño arquitectónico</h3>
+            <p>
+              Diseño de viviendas, espacios comerciales y proyectos
+              arquitectónicos adaptados a tus necesidades.
+            </p>
+            <a href="#contacto">Conocer servicio ↗</a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">02</span>
+            <div class="service-icon">▧</div>
+            <h3>Visualización 3D</h3>
+            <p>
+              Renders fotorrealistas, modelado tridimensional y
+              recorridos visuales para presentar tus ideas.
+            </p>
+            <a href="#contacto">Conocer servicio ↗</a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">03</span>
+            <div class="service-icon">⌘</div>
+            <h3>Construcción y obra</h3>
+            <p>
+              Planeación, presupuestos, documentación técnica y
+              acompañamiento durante la ejecución de obra.
+            </p>
+            <a href="#contacto">Conocer servicio ↗</a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">04</span>
+            <div class="service-icon">▤</div>
+            <h3>Gestión inmobiliaria</h3>
+            <p>
+              Administración de inmuebles, apoyo en gestión
+              inmobiliaria y acompañamiento de proyectos.
+            </p>
+            <a href="#contacto">Conocer servicio ↗</a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">05</span>
+            <div class="service-icon">▦</div>
+            <h3>Modelado BIM</h3>
+            <p>
+              Modelado de proyectos, documentación digital y
+              coordinación de información para construcción.
+            </p>
+            <a href="#contacto">Conocer servicio ↗</a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">06</span>
+            <div class="service-icon">＋</div>
+            <h3>Vivienda y desarrollo</h3>
+            <p>
+              Apoyo en proyectos de vivienda, desarrollo de
+              propuestas y soluciones constructivas.
+            </p>
+            <a href="#contacto">Conocer servicio ↗</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="servicios">
-      <div class="section-heading">
-        <p class="eyebrow">QUÉ HACEMOS</p>
-        <h2>Soluciones para cada etapa de tu proyecto.</h2>
-        <p>Desde la primera idea hasta la planeación y ejecución de la obra.</p>
-      </div>
-      <div class="service-grid">
-        <article class="service-card">
-          <span class="service-number">01</span>
-          <div class="service-icon">⌂</div>
-          <h3>Diseño arquitectónico</h3>
-          <p>Diseño de espacios, plantas, fachadas y documentación arquitectónica.</p>
-          <a href="#cotizador" data-service="diseno">Consultar servicio ↗</a>
-        </article>
-        <article class="service-card">
-          <span class="service-number">02</span>
-          <div class="service-icon">◫</div>
-          <h3>Renders 3D</h3>
-          <p>Visualización de espacios, iluminación y materiales para presentar tus ideas.</p>
-          <a href="#cotizador" data-service="render">Consultar servicio ↗</a>
-        </article>
-        <article class="service-card">
-          <span class="service-number">03</span>
-          <div class="service-icon">▤</div>
-          <h3>Presupuestos de obra</h3>
-          <p>Estimación de cantidades, actividades y costos de construcción.</p>
-          <a href="#cotizador" data-service="presupuesto">Consultar servicio ↗</a>
-        </article>
-        <article class="service-card">
-          <span class="service-number">04</span>
-          <div class="service-icon">▧</div>
-          <h3>Construcción</h3>
-          <p>Evaluación y cotización de proyectos según alcance, materiales y acabados.</p>
-          <a href="#cotizador" data-service="construccion">Consultar servicio ↗</a>
-        </article>
+    <!-- PORTAFOLIO -->
+    <section class="section portfolio" id="portafolio">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">NUESTRO TRABAJO</p>
+            <h2>Ideas que toman <span>forma.</span></h2>
+          </div>
+          <p class="section-intro">
+            Una mirada a las posibilidades del diseño, la
+            arquitectura y la construcción.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="project-card project-large">
+            <img
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85"
+              alt="Diseño arquitectónico residencial contemporáneo"
+              loading="lazy">
+            <div class="project-info">
+              <span>ARQUITECTURA RESIDENCIAL</span>
+              <h3>Espacios para vivir</h3>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img
+              src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
+              alt="Diseño interior contemporáneo"
+              loading="lazy">
+            <div class="project-info">
+              <span>DISEÑO INTERIOR</span>
+              <h3>Detalles que inspiran</h3>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img
+              src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1000&q=85"
+              alt="Arquitectura moderna"
+              loading="lazy">
+            <div class="project-info">
+              <span>DISEÑO Y VOLUMETRÍA</span>
+              <h3>Arquitectura contemporánea</h3>
+            </div>
+          </article>
+        </div>
+
+        <p class="portfolio-note">
+          Imágenes ilustrativas de referencia. El portafolio se
+          puede actualizar con fotografías de proyectos propios.
+        </p>
       </div>
     </section>
 
-    <section class="portfolio" id="portafolio">
-      <div class="section-heading">
-        <p class="eyebrow">PORTAFOLIO</p>
-        <h2>Las ideas merecen verse.</h2>
-        <p>Conoce las áreas de trabajo de SAMM Holdings.</p>
-      </div>
-      <div class="portfolio-grid">
-        <article class="portfolio-item portfolio-house">
-          <span>01 / RESIDENCIAL</span><h3>Diseño de vivienda</h3>
-        </article>
-        <article class="portfolio-item portfolio-interior">
-          <span>02 / INTERIORES</span><h3>Diseño de espacios</h3>
-        </article>
-        <article class="portfolio-item portfolio-building">
-          <span>03 / CONSTRUCCIÓN</span><h3>Proyectos y obra</h3>
-        </article>
-      </div>
-      <p class="portfolio-note">Imágenes ilustrativas que pueden sustituirse por proyectos reales.</p>
-    </section>
+    <!-- COTIZADOR -->
+    <section class="section estimator" id="cotizador">
+      <div class="container estimator-grid">
+        <div class="estimator-copy">
+          <p class="eyebrow">COTIZA TU PROYECTO</p>
+          <h2>Tu próxima idea comienza <span>aquí.</span></h2>
+          <p>
+            Cuéntanos qué necesitas y obtén una estimación
+            preliminar del presupuesto de tu proyecto.
+          </p>
 
-    <section class="section quote-section" id="cotizador">
-      <div class="quote-intro">
-        <p class="eyebrow">COTIZADOR SAMM</p>
-        <h2>Cuéntanos qué quieres construir.</h2>
-        <p>Obtén una estimación inicial. El valor definitivo requiere revisar el alcance del proyecto.</p>
-        <div class="quote-assurance">
-          <p>✓ Atención personalizada</p>
-          <p>✓ Alcance definido antes de cotizar</p>
-          <p>✓ Sin compromiso de contratación</p>
-        </div>
-      </div>
+          <ul class="benefit-list">
+            <li>✓ Estimación inicial de costos</li>
+            <li>✓ Atención personalizada</li>
+            <li>✓ Propuesta adaptada a tus necesidades</li>
+          </ul>
 
-      <form id="quoteForm" class="quote-form">
-        <label for="service">Servicio que necesitas</label>
-        <select id="service" name="service" required>
-          <option value="diseno">Diseño arquitectónico básico</option>
-          <option value="disenoCompleto">Diseño arquitectónico completo</option>
-          <option value="render">Render fotorrealista</option>
-          <option value="presupuesto">Presupuesto de obra</option>
-          <option value="construccion">Construcción de vivienda</option>
-        </select>
-
-        <div id="areaGroup">
-          <label for="area">Área aproximada (m²)</label>
-          <input id="area" name="area" type="number" min="1" max="100000" value="100" required>
+          <p class="disclaimer">
+            El resultado es orientativo y no constituye una oferta
+            comercial definitiva ni un presupuesto de obra.
+          </p>
         </div>
 
-        <div id="renderGroup" class="hidden">
-          <label for="images">Cantidad de imágenes</label>
-          <input id="images" name="images" type="number" min="1" max="100" value="1">
-        </div>
+        <form class="quote-form" id="quoteForm">
+          <h3>Calcula tu proyecto</h3>
+          <p class="form-intro">
+            Completa los datos para preparar tu consulta.
+          </p>
 
-        <div id="finishGroup" class="hidden">
-          <label for="finish">Nivel de acabados</label>
-          <select id="finish" name="finish">
-            <option value="basico">Básicos</option>
-            <option value="medio" selected>Medios</option>
-            <option value="premium">Premium</option>
+          <label for="projectType">Tipo de proyecto</label>
+          <select id="projectType" name="projectType" required>
+            <option value="diseno">Diseño arquitectónico</option>
+            <option value="render">Render y visualización 3D</option>
+            <option value="construccion">Construcción</option>
+            <option value="remodelacion">Remodelación</option>
+            <option value="bim">Modelado BIM</option>
           </select>
-        </div>
 
-        <div class="estimate" aria-live="polite">
-          <span>ESTIMACIÓN INICIAL</span>
-          <strong id="estimateValue">$3.000.000 COP</strong>
-          <small id="estimateNote">Valor orientativo sujeto a revisión.</small>
-        </div>
+          <label for="area">Área aproximada (m²)</label>
+          <input
+            id="area"
+            name="area"
+            type="number"
+            min="1"
+            max="100000"
+            placeholder="Ej. 120"
+            required>
 
-        <label for="clientName">Tu nombre</label>
-        <input id="clientName" name="clientName" type="text" maxlength="100" autocomplete="name" placeholder="Nombre completo" required>
+          <label for="finish">Nivel de acabados</label>
+          <select id="finish" name="finish" required>
+            <option value="basico">Básico</option>
+            <option value="medio" selected>Medio</option>
+            <option value="alto">Alto</option>
+          </select>
 
-        <label for="clientContact">WhatsApp o teléfono</label>
-        <input id="clientContact" name="clientContact" type="tel" maxlength="30" autocomplete="tel" placeholder="Tu número de contacto" required>
+          <button class="btn btn-primary quote-button" type="submit">
+            Calcular estimación ↗
+          </button>
 
-        <label for="city">Ciudad del proyecto</label>
-        <input id="city" name="city" type="text" maxlength="100" placeholder="Ej. Sincelejo" required>
-
-        <label for="details">Detalles adicionales (opcional)</label>
-        <textarea id="details" name="details" rows="3" maxlength="1000" placeholder="Cuéntanos más sobre tu proyecto"></textarea>
-
-        <button class="button button-blue button-full" type="submit">Solicitar cotización por WhatsApp ↗</button>
-        <p class="form-note">La estimación es orientativa y no constituye una oferta contractual.</p>
-        <p id="formMessage" class="form-message" aria-live="polite"></p>
-      </form>
+          <div class="quote-result" id="quoteResult" aria-live="polite"></div>
+        </form>
+      </div>
     </section>
 
-    <section class="contact-banner" id="contacto">
-      <p class="eyebrow">HABLEMOS DE TU PROYECTO</p>
-      <h2>El siguiente paso comienza con una conversación.</h2>
-      <p>Cuéntanos tu idea y revisaremos cómo podemos ayudarte.</p>
-      <a class="button button-blue" href="https://wa.me/573014987709"
-        target="_blank" rel="noopener noreferrer">Contactar a SAMM por WhatsApp ↗</a>
+    <!-- CONTACTO -->
+    <section class="section contact" id="contacto">
+      <div class="container contact-panel">
+        <div>
+          <p class="eyebrow">HABLEMOS DE TU PROYECTO</p>
+          <h2>Hagamos realidad <span>tu próxima idea.</span></h2>
+          <p>
+            Escríbenos para conversar sobre tu proyecto,
+            solicitar asesoría o recibir más información.
+          </p>
+        </div>
+
+        <div class="contact-actions">
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/573014987709"
+            target="_blank"
+            rel="noopener noreferrer">
+            Contactar por WhatsApp ↗
+          </a>
+          <span>Atención comercial en Colombia</span>
+        </div>
+      </div>
     </section>
+
   </main>
 
+  <!-- PIE DE PÁGINA -->
   <footer class="footer">
-    <a class="brand footer-brand" href="#inicio" aria-label="SAMM Holdings, inicio">
-      <img class="brand-logo" src="samm-logo.png" alt="Logo SAMM">
-      <span class="brand-text">
-        <span class="brand-name">SAMM</span>
-        <span class="brand-subtitle">HOLDINGS S.A.S.</span>
-      </span>
-    </a>
-    <p>Arquitectura · Visualización · Construcción</p>
-    <p>© <span id="year"></span> SAMM Holdings S.A.S. Todos los derechos reservados.</p>
-    <p class="footer-note">Las estimaciones no sustituyen una cotización técnica detallada.</p>
+    <div class="container footer-inner">
+      <a class="footer-brand" href="#inicio">
+        SAMM <span>HOLDINGS S.A.S.</span>
+      </a>
+      <p>Arquitectura · Diseño · Construcción</p>
+      <p>© <span id="currentYear"></span> SAMM Holdings S.A.S.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
