@@ -3,214 +3,127 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050811">
-  <meta name="description" content="SAMM Holdings S.A.S. — Arquitectura, diseño, visualización 3D y construcción.">
+  <meta name="description" content="SAMM Holdings S.A.S. Arquitectura, diseño, renders 3D y construcción en Colombia.">
   <title>SAMM Holdings S.A.S. | Arquitectura y Construcción</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-  <!-- ENCABEZADO -->
   <header class="header">
-
-    <a class="brand" href="#inicio" aria-label="SAMM Holdings S.A.S. - Inicio">
-      <img
-        class="brand-logo"
-        src="samm-logo.png"
-        alt="Símbolo de SAMM Holdings"
-      >
-
+    <a class="brand" href="#inicio" aria-label="SAMM Holdings S.A.S.">
+      <img class="brand-logo" src="samm-logo.png" alt="Logo SAMM">
       <span class="brand-text">
         <span class="brand-name">SAMM</span>
         <span class="brand-subtitle">HOLDINGS S.A.S.</span>
       </span>
     </a>
 
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-      type="button"
-      aria-label="Abrir menú"
-      aria-expanded="false"
-      aria-controls="nav"
-    >☰</button>
+    <button class="menu-toggle" id="menuToggle" type="button"
+      aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
 
-    <nav class="nav" id="nav" aria-label="Menú principal">
+    <nav class="nav" id="nav" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
       <a href="#portafolio">Portafolio</a>
       <a href="#cotizador">Cotizador</a>
       <a href="#contacto" class="nav-cta">Contáctanos ↗</a>
     </nav>
-
   </header>
 
   <main>
-
-    <!-- PORTADA -->
     <section class="hero" id="inicio">
-
       <div class="hero-content">
         <p class="eyebrow">ARQUITECTURA · DISEÑO · CONSTRUCCIÓN</p>
-
-        <h1>
-          Convertimos tus ideas en
-          <span>espacios extraordinarios.</span>
-        </h1>
-
+        <h1>Convertimos tus ideas en <span>espacios extraordinarios.</span></h1>
         <p class="hero-text">
           Diseño arquitectónico, visualización 3D, presupuestos y soluciones
           de construcción para llevar tus proyectos de la idea a la realidad.
         </p>
-
         <div class="hero-actions">
-          <a href="#cotizador" class="button button-blue">
-            Cotiza tu proyecto ↗
-          </a>
-
-          <a href="#servicios" class="button button-outline">
-            Explorar servicios
-          </a>
+          <a href="#cotizador" class="button button-blue">Cotiza tu proyecto ↗</a>
+          <a href="#servicios" class="button button-outline">Explorar servicios</a>
         </div>
-
-        <p class="hero-note">
-          Atención en Sincelejo, Barranquilla y proyectos en Colombia.
-        </p>
+        <p class="hero-note">Atención en Sincelejo, Barranquilla y proyectos en Colombia.</p>
       </div>
-
       <div class="hero-image" role="img" aria-label="Interior de arquitectura contemporánea">
         <div class="image-label">
           <span>DISEÑO CON PROPÓSITO</span>
           <strong>Tu proyecto comienza aquí.</strong>
         </div>
       </div>
-
     </section>
 
-    <!-- SERVICIOS -->
     <section class="section" id="servicios">
-
       <div class="section-heading">
         <p class="eyebrow">QUÉ HACEMOS</p>
         <h2>Soluciones para cada etapa de tu proyecto.</h2>
-        <p>
-          Desde la primera idea hasta la planeación y ejecución de la obra.
-        </p>
+        <p>Desde la primera idea hasta la planeación y ejecución de la obra.</p>
       </div>
-
       <div class="service-grid">
-
         <article class="service-card">
           <span class="service-number">01</span>
-          <div class="service-icon" aria-hidden="true">⌂</div>
+          <div class="service-icon">⌂</div>
           <h3>Diseño arquitectónico</h3>
-          <p>
-            Diseño de espacios, distribución, plantas, fachadas y documentación
-            según el alcance contratado.
-          </p>
-          <a href="#cotizador" data-service="diseno">
-            Consultar servicio ↗
-          </a>
+          <p>Diseño de espacios, plantas, fachadas y documentación arquitectónica.</p>
+          <a href="#cotizador" data-service="diseno">Consultar servicio ↗</a>
         </article>
-
         <article class="service-card">
           <span class="service-number">02</span>
-          <div class="service-icon" aria-hidden="true">◫</div>
+          <div class="service-icon">◫</div>
           <h3>Renders 3D</h3>
-          <p>
-            Visualización de espacios, iluminación y materiales para presentar
-            tus ideas con mayor claridad.
-          </p>
-          <a href="#cotizador" data-service="render">
-            Consultar servicio ↗
-          </a>
+          <p>Visualización de espacios, iluminación y materiales para presentar tus ideas.</p>
+          <a href="#cotizador" data-service="render">Consultar servicio ↗</a>
         </article>
-
         <article class="service-card">
           <span class="service-number">03</span>
-          <div class="service-icon" aria-hidden="true">▤</div>
+          <div class="service-icon">▤</div>
           <h3>Presupuestos de obra</h3>
-          <p>
-            Estimación de cantidades, actividades y costos a partir de los
-            planos y especificaciones disponibles.
-          </p>
-          <a href="#cotizador" data-service="presupuesto">
-            Consultar servicio ↗
-          </a>
+          <p>Estimación de cantidades, actividades y costos de construcción.</p>
+          <a href="#cotizador" data-service="presupuesto">Consultar servicio ↗</a>
         </article>
-
         <article class="service-card">
           <span class="service-number">04</span>
-          <div class="service-icon" aria-hidden="true">▧</div>
+          <div class="service-icon">▧</div>
           <h3>Construcción</h3>
-          <p>
-            Evaluación y cotización de proyectos constructivos según ubicación,
-            alcance, materiales y acabados.
-          </p>
-          <a href="#cotizador" data-service="construccion">
-            Consultar servicio ↗
-          </a>
+          <p>Evaluación y cotización de proyectos según alcance, materiales y acabados.</p>
+          <a href="#cotizador" data-service="construccion">Consultar servicio ↗</a>
         </article>
-
       </div>
     </section>
 
-    <!-- PORTAFOLIO -->
     <section class="portfolio" id="portafolio">
-
       <div class="section-heading">
         <p class="eyebrow">PORTAFOLIO</p>
         <h2>Las ideas merecen verse.</h2>
         <p>Conoce las áreas de trabajo de SAMM Holdings.</p>
       </div>
-
       <div class="portfolio-grid">
-
         <article class="portfolio-item portfolio-house">
-          <span>01 / RESIDENCIAL</span>
-          <h3>Diseño de vivienda</h3>
+          <span>01 / RESIDENCIAL</span><h3>Diseño de vivienda</h3>
         </article>
-
         <article class="portfolio-item portfolio-interior">
-          <span>02 / INTERIORES</span>
-          <h3>Diseño de espacios</h3>
+          <span>02 / INTERIORES</span><h3>Diseño de espacios</h3>
         </article>
-
         <article class="portfolio-item portfolio-building">
-          <span>03 / CONSTRUCCIÓN</span>
-          <h3>Proyectos y obra</h3>
+          <span>03 / CONSTRUCCIÓN</span><h3>Proyectos y obra</h3>
         </article>
-
       </div>
-
-      <p class="portfolio-note">
-        Las imágenes son ilustrativas y pueden sustituirse por proyectos
-        reales de SAMM Holdings.
-      </p>
-
+      <p class="portfolio-note">Imágenes ilustrativas que pueden sustituirse por proyectos reales.</p>
     </section>
 
-    <!-- COTIZADOR -->
     <section class="section quote-section" id="cotizador">
-
       <div class="quote-intro">
         <p class="eyebrow">COTIZADOR SAMM</p>
         <h2>Cuéntanos qué quieres construir.</h2>
-        <p>
-          Selecciona un servicio y obtén una estimación inicial. El valor
-          definitivo depende del alcance y de la revisión técnica.
-        </p>
-
+        <p>Obtén una estimación inicial. El valor definitivo requiere revisar el alcance del proyecto.</p>
         <div class="quote-assurance">
-          <p>✓ Sin compromiso de contratación</p>
           <p>✓ Atención personalizada</p>
           <p>✓ Alcance definido antes de cotizar</p>
+          <p>✓ Sin compromiso de contratación</p>
         </div>
       </div>
 
       <form id="quoteForm" class="quote-form">
-
         <label for="service">Servicio que necesitas</label>
         <select id="service" name="service" required>
           <option value="diseno">Diseño arquitectónico básico</option>
@@ -222,27 +135,12 @@
 
         <div id="areaGroup">
           <label for="area">Área aproximada (m²)</label>
-          <input
-            id="area"
-            name="area"
-            type="number"
-            min="1"
-            max="100000"
-            value="100"
-            required
-          >
+          <input id="area" name="area" type="number" min="1" max="100000" value="100" required>
         </div>
 
         <div id="renderGroup" class="hidden">
           <label for="images">Cantidad de imágenes</label>
-          <input
-            id="images"
-            name="images"
-            type="number"
-            min="1"
-            max="100"
-            value="1"
-          >
+          <input id="images" name="images" type="number" min="1" max="100" value="1">
         </div>
 
         <div id="finishGroup" class="hidden">
@@ -257,117 +155,49 @@
         <div class="estimate" aria-live="polite">
           <span>ESTIMACIÓN INICIAL</span>
           <strong id="estimateValue">$3.000.000 COP</strong>
-          <small id="estimateNote">
-            Estimación orientativa sujeta a revisión.
-          </small>
+          <small id="estimateNote">Valor orientativo sujeto a revisión.</small>
         </div>
 
         <label for="clientName">Tu nombre</label>
-        <input
-          id="clientName"
-          name="clientName"
-          type="text"
-          maxlength="100"
-          placeholder="Nombre completo"
-          autocomplete="name"
-          required
-        >
+        <input id="clientName" name="clientName" type="text" maxlength="100" autocomplete="name" placeholder="Nombre completo" required>
 
         <label for="clientContact">WhatsApp o teléfono</label>
-        <input
-          id="clientContact"
-          name="clientContact"
-          type="tel"
-          maxlength="30"
-          placeholder="Tu número de contacto"
-          autocomplete="tel"
-          required
-        >
+        <input id="clientContact" name="clientContact" type="tel" maxlength="30" autocomplete="tel" placeholder="Tu número de contacto" required>
 
         <label for="city">Ciudad del proyecto</label>
-        <input
-          id="city"
-          name="city"
-          type="text"
-          maxlength="100"
-          placeholder="Ej. Sincelejo"
-          required
-        >
+        <input id="city" name="city" type="text" maxlength="100" placeholder="Ej. Sincelejo" required>
 
-        <label for="details">Cuéntanos un poco más (opcional)</label>
-        <textarea
-          id="details"
-          name="details"
-          rows="3"
-          maxlength="1000"
-          placeholder="Tipo de proyecto, necesidades, acabados..."
-        ></textarea>
+        <label for="details">Detalles adicionales (opcional)</label>
+        <textarea id="details" name="details" rows="3" maxlength="1000" placeholder="Cuéntanos más sobre tu proyecto"></textarea>
 
-        <button class="button button-blue button-full" type="submit">
-          Solicitar cotización por WhatsApp ↗
-        </button>
-
-        <p class="form-note">
-          El cálculo es orientativo y no constituye una oferta contractual.
-          No incluye conceptos no especificados.
-        </p>
-
+        <button class="button button-blue button-full" type="submit">Solicitar cotización por WhatsApp ↗</button>
+        <p class="form-note">La estimación es orientativa y no constituye una oferta contractual.</p>
         <p id="formMessage" class="form-message" aria-live="polite"></p>
-
       </form>
     </section>
 
-    <!-- CONTACTO -->
     <section class="contact-banner" id="contacto">
       <p class="eyebrow">HABLEMOS DE TU PROYECTO</p>
       <h2>El siguiente paso comienza con una conversación.</h2>
-      <p>
-        Cuéntanos tu idea y revisaremos cómo podemos ayudarte.
-      </p>
-
-      <a
-        class="button button-blue"
-        href="https://wa.me/573014987709"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Contactar a SAMM por WhatsApp ↗
-      </a>
+      <p>Cuéntanos tu idea y revisaremos cómo podemos ayudarte.</p>
+      <a class="button button-blue" href="https://wa.me/573014987709"
+        target="_blank" rel="noopener noreferrer">Contactar a SAMM por WhatsApp ↗</a>
     </section>
-
   </main>
 
-  <!-- PIE DE PÁGINA -->
   <footer class="footer">
-
     <a class="brand footer-brand" href="#inicio" aria-label="SAMM Holdings, inicio">
-      <img
-        class="brand-logo"
-        src="samm-logo.png"
-        alt="Símbolo de SAMM Holdings"
-      >
-
+      <img class="brand-logo" src="samm-logo.png" alt="Logo SAMM">
       <span class="brand-text">
         <span class="brand-name">SAMM</span>
         <span class="brand-subtitle">HOLDINGS S.A.S.</span>
       </span>
     </a>
-
     <p>Arquitectura · Visualización · Construcción</p>
-
-    <p>
-      © <span id="year"></span> SAMM Holdings S.A.S.
-      Todos los derechos reservados.
-    </p>
-
-    <p class="footer-note">
-      Los servicios se prestan según el alcance contratado. Las estimaciones
-      no sustituyen una cotización técnica.
-    </p>
-
+    <p>© <span id="year"></span> SAMM Holdings S.A.S. Todos los derechos reservados.</p>
+    <p class="footer-note">Las estimaciones no sustituyen una cotización técnica detallada.</p>
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>
