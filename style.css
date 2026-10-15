@@ -707,3 +707,11 @@ textarea:focus-visible {
   width: 44px;
   height: 44px;
 }
+/* Ajuste definitivo del logo SAMM */
+.header .brand-logo {
+  width: 100px !important;
+  height: 80px !important;
+  max-width: none !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
