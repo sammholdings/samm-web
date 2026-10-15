@@ -1,9 +1,12 @@
 
+"use strict";
+
+/* CONFIGURACIÓN COMERCIAL DE SAMM HOLDINGS */
 const CONFIG = {
-  // Reemplaza este número por el WhatsApp comercial correcto de SAMM.
-  // Debe incluir el indicativo de Colombia (57), sin + ni espacios.
   whatsapp: "573014987709",
 
+  // Tarifas ilustrativas en pesos colombianos.
+  // Revisa estos valores antes de ofrecer cotizaciones reales.
   tarifas: {
     diseno: 30000,
     disenoCompleto: 55000,
@@ -15,20 +18,25 @@ const CONFIG = {
   presupuestoMinimo: 600000
 };
 
+/* ELEMENTOS DE LA PÁGINA */
 const service = document.getElementById("service");
 const area = document.getElementById("area");
 const images = document.getElementById("images");
 const finish = document.getElementById("finish");
+
 const areaGroup = document.getElementById("areaGroup");
 const renderGroup = document.getElementById("renderGroup");
 const finishGroup = document.getElementById("finishGroup");
+
 const estimateValue = document.getElementById("estimateValue");
 const estimateNote = document.getElementById("estimateNote");
 const quoteForm = document.getElementById("quoteForm");
 const formMessage = document.getElementById("formMessage");
+
 const nav = document.getElementById("nav");
 const menuToggle = document.getElementById("menuToggle");
 
+/* FORMATO DE MONEDA COLOMBIANA */
 const money = value =>
   new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -36,6 +44,7 @@ const money = value =>
     maximumFractionDigits: 0
   }).format(value);
 
+/* NOMBRES DE LOS SERVICIOS */
 const serviceNames = {
   diseno: "Diseño arquitectónico básico",
   disenoCompleto: "Diseño arquitectónico completo",
@@ -44,11 +53,16 @@ const serviceNames = {
   construccion: "Construcción de vivienda"
 };
 
+/* CALCULAR ESTIMACIÓN */
 function calculateEstimate() {
   const selected = service.value;
   const squareMeters = Math.max(0, Number(area.value) || 0);
-  const imageCount = Math.max(1, Number(images.value) || 1);
+  const imageCount = Math.min(
+    100,
+    Math.max(1, Number(images.value) || 1)
+  );
 
+  // Mostrar únicamente los campos necesarios para cada servicio.
   areaGroup.classList.toggle("hidden", selected === "render");
   renderGroup.classList.toggle("hidden", selected !== "render");
   finishGroup.classList.toggle("hidden", selected !== "construccion");
@@ -72,7 +86,7 @@ function calculateEstimate() {
 
     case "render":
       total = imageCount * CONFIG.tarifas.render;
-      note = "Desde $250.000 COP por imagen de referencia.";
+      note = "Referencia desde $250.000 COP por imagen.";
       break;
 
     case "presupuesto":
@@ -99,9 +113,13 @@ function calculateEstimate() {
         "Referencia inicial para vivienda. Requiere revisión técnica.";
       break;
     }
+
+    default:
+      total = 0;
+      note = "Selecciona un servicio para calcular una estimación.";
   }
 
-  estimateValue.textContent = money(total) + " COP";
+  estimateValue.textContent = money(total);
   estimateNote.textContent = note;
 
   return {
@@ -112,21 +130,29 @@ function calculateEstimate() {
   };
 }
 
-// Actualizar el cálculo cuando cambien los campos.
+/* ACTUALIZAR CÁLCULO AL CAMBIAR LOS CAMPOS */
 [service, area, images, finish].forEach(element => {
   element.addEventListener("input", calculateEstimate);
   element.addEventListener("change", calculateEstimate);
 });
 
-// Permitir que los enlaces de los servicios seleccionen el cotizador.
+/* LOS ENLACES DE SERVICIOS SELECCIONAN EL COTIZADOR */
 document.querySelectorAll("[data-service]").forEach(link => {
   link.addEventListener("click", () => {
-    service.value = link.dataset.service;
+    const selectedService = link.dataset.service;
+
+    // El enlace de diseño dirige al diseño básico.
+    if (selectedService === "diseno") {
+      service.value = "diseno";
+    } else if (serviceNames[selectedService]) {
+      service.value = selectedService;
+    }
+
     calculateEstimate();
   });
 });
 
-// Menú adaptable para teléfonos.
+/* MENÚ RESPONSIVE PARA CELULARES */
 menuToggle.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("open");
 
@@ -139,7 +165,7 @@ menuToggle.addEventListener("click", () => {
   menuToggle.textContent = isOpen ? "×" : "☰";
 });
 
-// Cerrar el menú después de elegir una sección.
+/* CERRAR MENÚ DESPUÉS DE ELEGIR UNA SECCIÓN */
 nav.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     nav.classList.remove("open");
@@ -149,12 +175,14 @@ nav.querySelectorAll("a").forEach(link => {
   });
 });
 
-// Preparar la solicitud comercial para WhatsApp.
+/* CREAR SOLICITUD DE COTIZACIÓN POR WHATSAPP */
 quoteForm.addEventListener("submit", event => {
   event.preventDefault();
   formMessage.textContent = "";
 
-  if (!quoteForm.reportValidity()) return;
+  if (!quoteForm.reportValidity()) {
+    return;
+  }
 
   const result = calculateEstimate();
 
@@ -176,6 +204,12 @@ quoteForm.addEventListener("submit", event => {
     return;
   }
 
+  if (!serviceNames[result.selected]) {
+    formMessage.textContent =
+      "Selecciona un servicio válido.";
+    return;
+  }
+
   const quantity = result.selected === "render"
     ? `Cantidad de imágenes: ${result.imageCount}`
     : `Área aproximada: ${result.squareMeters} m²`;
@@ -193,10 +227,10 @@ quoteForm.addEventListener("submit", event => {
     `Servicio: ${serviceNames[result.selected]}`,
     quantity,
     finishText,
-    `Estimación ilustrativa de la web: ${money(result.total)} COP`,
+    `Estimación ilustrativa de la web: ${money(result.total)}`,
     `Detalles: ${details || "Pendiente por definir"}`,
     "",
-    "Entiendo que la estimación no es una cotización definitiva."
+    "Entiendo que la estimación es orientativa y no constituye una cotización definitiva."
   ].filter(Boolean).join("\n");
 
   const whatsappUrl =
@@ -211,20 +245,23 @@ quoteForm.addEventListener("submit", event => {
     "noopener,noreferrer"
   );
 
+  // Alternativa si el navegador bloquea la nueva ventana.
   if (!whatsappWindow) {
-    formMessage.innerHTML = "";
+    formMessage.textContent = "";
+
     const link = document.createElement("a");
     link.href = whatsappUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     link.textContent = "Haz clic aquí para abrir WhatsApp";
+
     formMessage.appendChild(link);
   }
 });
 
-// Mostrar el año actual en el pie de página.
+/* AÑO AUTOMÁTICO EN EL PIE DE PÁGINA */
 document.getElementById("year").textContent =
   new Date().getFullYear();
 
-// Calcular el precio inicial al abrir la web.
+/* CALCULAR EL VALOR INICIAL AL CARGAR LA PÁGINA */
 calculateEstimate();
